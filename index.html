@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Phiếu Thu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .form-container {
+            margin-bottom: 20px;
+        }
+
+        label,
+        input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .receipts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            page-break-inside: avoid;
+        }
+
+        .receipt {
+            border: 1px solid #000;
+            padding: 20px;
+            max-width: 45%;
+            flex: 1 1 45%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        .print-button {
+            margin-top: 20px;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #receiptsContainer,
+            #receiptsContainer * {
+                visibility: visible;
+            }
+
+            .print-button {
+                display: none;
+            }
+
+            #receiptsContainer {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                page-break-inside: avoid;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            .receipt {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                flex: 1 1 45%;
+                max-width: 45%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Nhập Thông Tin Phiếu Thu</h1>
+    <div id="formsContainer">
+        <div class="form-container">
+            <label for="name-0">Tên người nhận:</label>
+            <input type="text" id="name-0" placeholder="Nhập tên người nhận">
+
+            <label for="amount-0">Số tiền (VNĐ):</label>
+            <input type="number" id="amount-0" placeholder="Nhập số tiền">
+        </div>
+    </div>
+
+    <button onclick="addForm()">Thêm</button>
+    <button onclick="generateReceipts()">Tạo Phiếu Thu</button>
+
+    <div id="receiptsContainer" class="receipts-container"></div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
